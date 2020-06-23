@@ -1,0 +1,34 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>VR-KeepYourDistance!</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+</head>
+
+<body>
+  <a-scene>
+
+    <a-camera>
+      <a-cursor id="js--cursor" color="black"></a-cursor>
+      <a-entity text="value: 1/10; color: black; width: 2;" position="-0.3 0.5 -1"></a-entity>
+      <a-plane id="toast" position="1 0.5 -1" width="0.25" height="0.1" color="#4CAF50">
+        <a-text width="1" position="-0.09 0 0"></a-text>
+      </a-plane>
+    </a-camera>
+
+    <a-plane id="button" position="0 1 -3" color="blue" width="1" height="1">
+      <a-text value="Click me" width="3" position="-0.25 0 0"></a-text>
+    </a-plane>
+
+    <!-- <a-plane cursor-listener position="-1 0 -8" material="color: hotpink" width="1" height="1"></a-plane>
+    <a-plane position="0 0 -8" color="hotpink" width="1" height="1"></a-plane>
+    <a-plane position="1 0 -8" color="hotpink" width="1" height="1"></a-plane> -->
+
+    <a-box id="box" position="1 0.5 -8" color="red" height="1" width="1"></a-box>
+
+  </a-scene>
+</body>
+
+</html>
