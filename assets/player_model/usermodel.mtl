@@ -10,7 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd D:\\Thomas\\OneDrive - Hogeschool Leiden\\Hoge School Leiden\\Jaar 3 - Hoofdfase\\Periodes\\Periode 4\\IKMEDT\\Blender\\1.jpg
+map_Kd assets\player_model\1.jpg
 
 newmtl Material.002
 Ns 225.000000
@@ -21,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd D:\\Thomas\\OneDrive - Hogeschool Leiden\\Hoge School Leiden\\Jaar 3 - Hoofdfase\\Periodes\\Periode 4\\IKMEDT\\Blender\\1.jpg
+map_Kd assets\player_model\1.jpg
 
 newmtl Material.003
 Ns 225.000000
@@ -32,7 +32,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd D:\\Thomas\\OneDrive - Hogeschool Leiden\\Hoge School Leiden\\Jaar 3 - Hoofdfase\\Periodes\\Periode 4\\IKMEDT\\Blender\\1.jpg
+map_Kd assets\player_model\1.jpg
 
 newmtl Material.004
 Ns 225.000000
@@ -43,7 +43,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd D:\\Thomas\\OneDrive - Hogeschool Leiden\\Hoge School Leiden\\Jaar 3 - Hoofdfase\\Periodes\\Periode 4\\IKMEDT\\Blender\\2.jpg
+map_Kd assets\player_model\2.jpg
 
 newmtl Material.005
 Ns 225.000000
@@ -54,4 +54,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd D:\\Thomas\\OneDrive - Hogeschool Leiden\\Hoge School Leiden\\Jaar 3 - Hoofdfase\\Periodes\\Periode 4\\IKMEDT\\Blender\\2.jpg
+map_Kd assets\player_model\2.jpg
