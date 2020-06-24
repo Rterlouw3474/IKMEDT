@@ -14,25 +14,22 @@
 
   <a-scene>
 
-    <a-camera wasd-controls="acceleration: 0">
+    <a-assets>
+      <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
+      <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
+    </a-assets>
+
+    <a-camera wasd-controls="acceleration: 100">
       <a-cursor id="js--cursor" color="black"></a-cursor>
     </a-camera>
+
+    <a-obj-model src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22" rotation="0 90 0" position="0 0 0"></a-obj-model>
+
 
     <!-- Sky -->
     <a-sky color="#c3d3ff"></a-sky>
 
-    <!-- Start screen text -->
-    <a-text position="0 2 -1" align="center" color="#FFFFFF" value="Welkom bij:"></a-text>
-    <a-text position="0 1.8 -1" align="center" color="#FFFFFF" value="KeepYourDistance"></a-text>
-    <a-text position="0 1.7 -4" align="center" color="#FFFFFF" value="Richt op een knop om een keuze te maken"></a-text>
-
-    <!-- Tutorial button & text -->
-    <a-text position="-1.2 1.1 -4" align="center" color="#9eff84" value="Uitleg"></a-text>
-    <a-sphere color="#9eff84" position="-1.5 0 -5" radius="0.6"></a-sphere>
-
-    <!-- Game button & text -->
-    <a-text position="1.2 1.1 -4" align="center" color="#ff89f5" value="Spel"></a-text>
-    <a-sphere color="#ff89f5" position="1.5 0 -5" radius="0.6"></a-sphere>
+    <!-- Player model -->
 
 
   </a-scene>
