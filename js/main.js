@@ -1,25 +1,15 @@
 window.onload = () => {
 
-    // const cursor = document.getElementById("js--cursor");
-    // const box = document.getElementById("box");
-    // const button = document.getElementById("button");
-    // const toast = document.getElementById("toast");
-    //
-    //
-    // button.addEventListener('click', () => {
-    //     var color = box.getAttribute('color');
-    //     if (color == "red") {
-    //         const text = toast.firstElementChild;
-    //         text.setAttribute('value', "It's green!");
-    //         toast.setAttribute('color', 'green');
-    //         box.setAttribute('color', 'green');
-    //     }
-    //     else if (color == "green") {
-    //         const text = toast.firstElementChild;
-    //         text.setAttribute('value', "It's red!");
-    //         toast.setAttribute('color', 'red');
-    //         box.setAttribute('color', 'red');
-    //     }
-    // })
 
 }
+
+window.setInterval(function(){
+
+  const camera = document.getElementById("js--camera");
+  const playermodel = document.getElementById("js--player-model");
+
+  console.log("move player model");
+  playermodel.setAttribute("position",camera.getAttribute("position").x + " " + "0" + " " + camera.getAttribute("position").z);
+
+
+}, 10);

@@ -10,28 +10,25 @@
 
 <body>
 
-  <!-- positioning: x y z -->
-
   <a-scene>
 
+    <!-- Initialize Assets (player model) -->
     <a-assets>
       <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
     </a-assets>
 
-    <a-camera id="cameraWrapper" wasd-controls="acceleration: 100">
+    <a-camera id="js--camera" wasd-controls="acceleration: 100">
       <a-cursor id="js--cursor" color="black"></a-cursor>
     </a-camera>
-
-    <a-obj-model src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22" rotation="0 90 0" position="0 0 0"></a-obj-model>
-
 
     <!-- Sky -->
     <a-sky color="#c3d3ff"></a-sky>
 
     <!-- Player model -->
+    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22" rotation="0 90 0" position="0 0 0"></a-obj-model>
 
-
+    <a-box color="black" position="1 1 -3s"></a-box>s
   </a-scene>
 </body>
 
