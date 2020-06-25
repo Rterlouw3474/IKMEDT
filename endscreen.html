@@ -1,0 +1,31 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>VR-KeepYourDistance!</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+
+<body>
+
+  <!-- positioning: x y z -->
+
+  <a-scene>
+
+    <a-camera wasd-controls="acceleration: 0">
+      <a-cursor id="js--cursor" color="black"></a-cursor>
+    </a-camera>
+
+    <!-- Sky -->
+    <a-sky color="red"></a-sky>
+
+    <!-- End screen text -->
+    <a-text position="0 1.8 -1" align="center" color="#FFFFFF" value="Einde van het spel!"></a-text>
+    <a-text position="0 1.7 -4" align="center" color="#FFFFFF" value="Richt op de knop om naar het terug te gaan"></a-text>
+    <a-sphere color="#FFF" position="0 0.6 -5" radius="0.6"></a-sphere>
+
+  </a-scene>
+</body>
+
+</html>

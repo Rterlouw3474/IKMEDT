@@ -1,8 +1,3 @@
-window.onload = () => {
-
-
-}
-
 window.setInterval(function(){
 
   const camera = document.getElementById("js--camera");

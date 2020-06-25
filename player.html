@@ -1,0 +1,34 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>VR-KeepYourDistance!</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script type="text/javascript" src="./js/player.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+
+<body>
+
+  <a-scene>
+
+    <!-- Initialize Assets (player model) -->
+    <a-assets>
+      <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
+      <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
+    </a-assets>
+
+    <a-camera id="js--camera" wasd-controls="acceleration: 100">
+      <a-cursor id="js--cursor" color="black"></a-cursor>
+    </a-camera>
+
+    <!-- Sky -->
+    <a-sky color="#c3d3ff"></a-sky>
+
+    <!-- Player model -->
+    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22" rotation="0 90 0" position="0 0 0"></a-obj-model>
+
+  </a-scene>
+</body>
+
+</html>
