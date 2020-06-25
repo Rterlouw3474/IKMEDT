@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>VR-KeepYourDistance!</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+  <script type="text/javascript" src="./js/nav.js"></script>
+  <script type="text/javascript" src="./js/endscreen.js"></script>
 </head>
 
 <body>
@@ -14,7 +15,18 @@
   <a-scene>
 
     <a-camera wasd-controls="acceleration: 0">
-      <a-cursor id="js--cursor" color="black"></a-cursor>
+      <a-entity
+        animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 2000; from: 1 1 1; to: 0.1 0.1 0.1"
+        animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+        animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 500; to: 1 1 1"
+        cursor="fuse: true; fuseTimeout: 2000"
+        material="color: black; shader: flat"
+        geometry="primitive: ring; radiusInner: 0.005; radiusOuter: 0.01"
+        color="black"
+        position="0 0 -0.5"
+        raycaster="objects: .js--Button"
+        id="js--cursor"
+      ></a-entity>
     </a-camera>
 
     <!-- Sky -->
@@ -23,7 +35,7 @@
     <!-- End screen text -->
     <a-text position="0 1.8 -1" align="center" color="#FFFFFF" value="Einde van het spel!"></a-text>
     <a-text position="0 1.7 -4" align="center" color="#FFFFFF" value="Richt op de knop om naar het terug te gaan"></a-text>
-    <a-sphere color="#FFF" position="0 0.6 -5" radius="0.6"></a-sphere>
+    <a-sphere id="game" class="js--Button" color="#FFF" position="0 0.6 -5" radius="0.6"></a-sphere>
 
   </a-scene>
 </body>
