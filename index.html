@@ -5,39 +5,47 @@
   <title>VR-KeepYourDistance!</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="./js/aframe.js"></script>
+
 </head>
 
 <body>
-  <a-scene>
 
-    <a-camera>
+  <a-scene>
+    <a-assets>
+      <a-assets-item id="user-obj" src="./Models/User/BasicBanditBlend.obj"></a-assets-item>
+      <a-assets-item id="user-mtl" src="./Models/User/BasicBanditBlend.mtl"></a-assets-item>
+    </a-assets>
+    <!-- <a-entity light="color: white; intensity: 0.5" position="-2 10 -3"></a-entity>
+    <a-entity light="color: white; intensity: 0.5" position="-2 10 3"></a-entity> -->
+
+    <a-camera id="myCamera">
       <a-cursor mycursor id="js--cursor" color="black">
       </a-cursor>
 
-      <a-entity text="value: 1/10; color: black; width: 1;" position="-0.9 0.5 -1"></a-entity>
+      <a-entity id="tutorial-counter" text="value: 1/10; color: black; width: 1;" position="-0.9 0.5 -1"></a-entity>
       <a-plane id="toast" position="1 0.5 -1" width="1" height="0.1" color="#4CAF50" visible="false">
         <a-text width="1" position="0 0 0" align="center"></a-text>
       </a-plane>
     </a-camera>
 
 
-    <!-- MENU GENERIC -->
-    <a-entity id="generic-menu" visible="false">
+    <!-- MENU GENERIC-->
+    <a-entity id="generic-menu" visible="false" position="1000 1000 1000">
       <a-plane id="title-plane" position="0 2.1 -2" width="1" height="0.2">
         <a-text id="menu-title" align="center" value="Settings Menu" width="2" color="black"></a-text>
       </a-plane>
-      <a-plane onClick="Settings.closeSettings()" position="0 0.8 -2" color="blue" material="" geometry="height: 0.25"
-        scale="">
+      <a-plane onClick="Settings.closeSettings()" interactive-feedback position="0 0.8 -2" color="blue" material=""
+        geometry="height: 0.25" scale="">
         <a-text value="Back" interactive-feedback text="align: center" width="2.5"></a-text>
       </a-plane>
     </a-entity>
-    <a-plane onClick="Settings.openSettings()" position="2.5 0.8 -2" color="blue" material="" geometry="height: 0.25"
-      scale="">
+    <a-plane onClick="Settings.openSettings()" interactive-feedback position="2.5 0.8 -2" color="blue" material=""
+      geometry="height: 0.25" scale="">
       <a-text value="Settings" interactive-feedback text="align: center" width="2.5"></a-text>
     </a-plane>
 
     <!-- SETTINGS MENU SPECIFIC -->
-    <a-entity id="settings-menu-scene" visible="false">
+    <a-entity id="settings-menu-scene" visible="false" position="1000 1000 1000">
       <a-plane id="sound-plane" position="-1 1.5 -1.75" rotation="0 30 0" color="blue" width="1" height="1">
         <a-text value="Geluid aan of uit?" width="1.5" position="-0.29 0.2 0"></a-text>
         <a-plane onClick="Settings.toggleSound(true)" toast="message:Het geluid staat aan!" interactive-feedback
@@ -66,13 +74,13 @@
       <a-plane id="units-plane" position="1 1.5 -1.75" rotation="0 -30 0" color="blue" width="1" height="1">
         <a-text value="Eenheid" width="1.5" position="-0.1 0.2 0"></a-text>
         <a-plane onClick="Settings.setUnit('metric')" toast="message:De eenheid is aangepast naar Metric"
-          interactive-feedback="" id="metric" position="-0.2141 -0.05 0.00107" width="0.35" height="0.3" color="blue"
+          interactive-feedback id="metric" position="-0.2141 -0.05 0.00107" width="0.35" height="0.3" color="blue"
           material="" geometry="">
           <a-text align="center" value="Rolmaat" width="1.5"></a-text>
           <a-text align="center" value="(Metric)" width="1" position="0 -0.1 0" text=""></a-text>
         </a-plane>
         <a-plane onClick="Settings.setUnit('imperial')" toast="message:De eenheid is aangepast naar Imperial"
-          interactive-feedback="" id="imperial" position="0.22098 -0.05 0.01256" width="0.5" height="0.3" color="blue"
+          interactive-feedback id="imperial" position="0.22098 -0.05 0.01256" width="0.5" height="0.3" color="blue"
           material="" geometry="">
           <a-text align="center" value="Lichaamsdelen" width="1.5"></a-text>
           <a-text align="center" value="(Imperial)" width="1" position="0 -0.1 0" text=""></a-text>
@@ -80,11 +88,38 @@
       </a-plane>
     </a-entity>
 
-    <a-box id="box" position="1 0.5 -8" color="red" height="1" width="1"></a-box>
+    <!-- Tutorial game -->
+    <!-- look-at="#myCamera" -->
+    <a-entity id="tutorial-game-scene">
 
-  </a-scene>
+      <!-- Bron: https://www.turbosquid.com/FullPreview/Index.cfm/ID/1250561 -->
+      <a-obj-model id="user" src="#user-obj" mtl="#user-mtl" position="0 0 0.2" rotation="0 180"></a-obj-model>
 
-  <script type="text/javascript" src="./js/main.js"></script>
+      <a-plane position="0 0 -2" width="5" height="5" rotation="-90" color="grey"></a-plane>
+
+      <a-box id="box" position="-0.6 0.5 -1.5" color="red" height="0.5" width="0.5" material="" geometry="depth: 0.5">
+        <a-plane look-at="#myCamera" id="question" position="0 1 0" width="0.5" height="0.3" material="opacity: 0"
+          geometry="">
+
+          <a-plane material="opacity: 0.3; color: #000" position="0 0.5 0" geometry="height: 0.3">
+            <a-text align="center" value="Meer dan 1.5 M?" width="2" color="#000" text=""></a-text>
+          </a-plane>
+
+          <a-plane onclick="Tutorial.setAnswer('yes')" interactive-feedback="" material="opacity: 0.3; color: #00ff2a"
+            geometry="height: 0.3; width: 0.5" position="0.3 0 0">
+            <a-text id="answer-yes" align="center" value="Ja" width="1.8" position="" color="#000" text=""></a-text>
+          </a-plane>
+          <a-plane onclick="Tutorial.setAnswer('no')" id="answer-no" interactive-feedback=""
+            material="opacity: 0.3; color: #ff0000" geometry="height: 0.3; width: 0.5" position="-0.3 0 0">
+            <a-text align="center" value="Nee" width="1.8" position="" color="#000" text=""></a-text>
+          </a-plane>
+
+        </a-plane>
+      </a-box>
+
+    </a-entity>
+
+    <script type="text/javascript" src="./js/main.js"></script>
 </body>
 
 </html>
