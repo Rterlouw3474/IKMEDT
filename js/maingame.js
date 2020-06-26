@@ -33,10 +33,19 @@ window.onload = function () {
   setInterval(onTimerTick, 33);
 
   function onTimerTick() {
-    const user = document.getElementById("user");
-    const zombie = document.getElementById("zombie");
-    const distance = calc_distance(user, zombie);
-    console.log(distance);
+    for (let i = 0; i < zombies.length; i++) {
+      const user = document.getElementById("js--player-model");
+      let zombie = zombies[i];
+      let userPos = user.object3D.position;
+      let zombiePos = zombie.object3D.position;
+      let distance = userPos.distanceTo(zombiePos);
+
+      console.log(distance)
+
+      if(distance <= 1.6) {
+        victory = false;
+      }
+    }
   }
 
   function gameEnd() {
@@ -56,7 +65,7 @@ window.onload = function () {
         setTimeout(function () {
           console.log("naar eindpagina");
           navigateToEndscreen();
-        }, 2000);
+        }, 8000);
 
       }
       if (!victory) {
@@ -66,16 +75,16 @@ window.onload = function () {
         setTimeout(function () {
           console.log("naar eindpagina");
           navigateToEndscreen();
-        }, 2000);
+        }, 8000);
 
       }
-    }, 2000);
+    }, 8000);
   }
 
   for (let i = 0; i < places.length; i++) {
     places[i].addEventListener("click", function (evt) {
       let att = document.createAttribute("animation");
-      att.value = "property: position; easing: linear; dur: 2000; to: " + this.getAttribute('position').x + " 3 " +
+      att.value = "property: position; easing: linear; dur: 8000; to: " + this.getAttribute('position').x + " 3 " +
         this.getAttribute('position').z;
       camera.setAttribute("animation", att.value);
       gameEnd();

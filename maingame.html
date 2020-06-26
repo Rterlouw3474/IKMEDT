@@ -79,7 +79,9 @@
     <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22"
       rotation="0 90 0" position="0 0 0"></a-obj-model>
 
-    <a-entity id="zombie" class="zombie" obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="0 1 -20" scale="0.5 0.5 0.5"
+    <a-entity class="zombie" obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="0 1 -20" scale="0.5 0.5 0.5"
+      sound="src: url(assets/zombie/zombie.mp3); autoplay: false;"></a-entity>
+    <a-entity class="zombie" obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="1.4 1 20" scale="0.5 0.5 0.5"
       sound="src: url(assets/zombie/zombie.mp3); autoplay: false;"></a-entity>
 
     <a-sphere class="js--restart sun" color="yellow" radius="10" position="0 100 0"></a-sphere>
