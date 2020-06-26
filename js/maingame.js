@@ -1,6 +1,6 @@
 window.onload = function () {
   const places = document.getElementsByClassName("direction");
-  const camera = document.getElementById("js--camera");
+  const camera = document.getElementById("js--camera myCamera");
   const restart = document.getElementsByClassName("js--restart");
   const start = document.getElementsByClassName("js--start");
   const zombies = document.getElementsByClassName("zombie");
