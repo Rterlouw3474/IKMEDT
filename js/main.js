@@ -1,3 +1,18 @@
+window.onload = function() {
+  const camera = document.getElementById("js--camera");
+  const start = document.getElementsByClassName("js--start");
+  const places = document.getElementsByClassName("buttons");
+
+  for (let i = 0; i < start.length; i++) {
+    start[i].addEventListener("click", function(evt) {
+      informationPopup.setAttribute("visible",false);
+      for (let i = 0; i < places.length; i++) {
+        places[i].classList.add('js--place')
+      }
+    });
+  }
+}
+
 const calc_distance = (el1, el2) => {
     const pos1 = el1.object3D.position;
     const pos2 = el2.object3D.position;
