@@ -18,14 +18,27 @@ class SettingsService {
     setDistance(dist) {
         this.distance = dist;
         console.log("distance ", dist)
+        const question = document.getElementById("question");
+        if (this.unit == "Feet") {
+            this.distance = this.distance * 3.28;
+        }
+        question.setAttribute("value", "Meer dan " + this.distance + this.unit + "?")
     }
     setUnit(unit) {
         this.unit = unit;
         console.log("unit ", unit)
+        const question = document.getElementById("question");
+        if (this.unit == "Feet") {
+            this.distance = this.distance * 3.28;
+        }
+        question.setAttribute("value", "Meer dan " + this.distance + this.unit + "?")
     }
     closeSettings() {
         const settings = document.getElementById("settings-menu-scene");
         const general = document.getElementById("generic-menu");
+        const questionPane = document.getElementById("box questionPane");
+        questionPane.setAttribute("visible", true);
+        questionPane.setAttribute('position', '-0.6 0.5 -1.5');
         settings.setAttribute('visible', false);
         settings.setAttribute('position', '1000 1000 1000');
         general.setAttribute('visible', false);
@@ -34,10 +47,15 @@ class SettingsService {
     openSettings() {
         const settings = document.getElementById("settings-menu-scene");
         const general = document.getElementById("generic-menu");
+        const cameraPosition = document.getElementById("js--camera").getAttribute("position");
+        const questionPane = document.getElementById("box questionPane");
+        questionPane.setAttribute("visible", false);
+        questionPane.setAttribute('position', '1000 1000 1000');
+        console.log(cameraPosition);
         settings.setAttribute('visible', true);
-        settings.setAttribute('position', '0 0 0');
+        settings.setAttribute('position', cameraPosition.x + " 0 " + cameraPosition.z);
         general.setAttribute('visible', true);
-        general.setAttribute('position', '0 0 0');
+        general.setAttribute('position', cameraPosition.x + " 0 " + cameraPosition.z);
     }
 }
 
@@ -53,6 +71,7 @@ class TutorialService {
     }
 
     startTutorial() {
+        this.reset();
         const tutorialCounter = document.getElementById("tutorial-counter");
         tutorialCounter.setAttribute("visible", "true");
         tutorialCounter.setAttribute("text", "value: 1/10");
@@ -62,60 +81,68 @@ class TutorialService {
         const tutorialResult = document.getElementById("tutorial-result");
         tutorialResult.setAttribute("visible", "true");
         tutorialResult.setAttribute("position", "0 0 0");
-        
-        tutorialResult.setAttribute("", "")
+
+        const achieved = document.getElementById("achieved");
+        const tutorialMessage = document.getElementById("tutorial-message");
+
+        if (this.rightAnswers >= 6) {
+            achieved.setAttribute("value", "Gehaald!");
+        } else {
+            achieved.setAttribute("value", "Niet gehaald")
+        }
+        tutorialMessage.setAttribute("value", this.rightAnswers + "/" + this.totalQuestions + " geraden");
 
         const tutorialScene = document.getElementById("tutorial-game-scene");
         tutorialScene.setAttribute("visible", "false");
         tutorialScene.setAttribute("position", "1000 1000 1000");
     }
 
+    reset() {
+        const tutorialResult = document.getElementById("tutorial-result");
+        tutorialResult.setAttribute("visible", "false");
+        tutorialResult.setAttribute("position", "1000 1000 1000");
+
+        const tutorialScene = document.getElementById("tutorial-game-scene");
+        tutorialScene.setAttribute("visible", "true");
+        tutorialScene.setAttribute("position", "0 0 0");
+    }
+
     setAnswer(yesOrNo) {
         const tutorialCounter = document.getElementById("tutorial-counter");
         const user = document.getElementById("user")
-        const currBox = document.getElementById("box");
+        const currBox = document.getElementById("box questionPane");
         const distance = calc_distance(user, currBox);
         if (distance >= this.settings.distance) {
             if (yesOrNo == "yes") {
-                Toast.showToast("Goedzo! De afstand was " + distance, "green");
+                window.Toast.showToast("Goedzo! De afstand was " + distance, "green");
                 this.rightAnswers += 1;
             } else {
-                Toast.showToast("Helaas! De afstand was " + distance, "red");
+                window.Toast.showToast("Helaas! De afstand was " + distance, "red");
             }
         } else {
             if (yesOrNo == "no") {
-                Toast.showToast("Goedzo! De afstand was " + distance, "green");
+                window.Toast.showToast("Goedzo! De afstand was " + distance, "green");
                 this.rightAnswers += 1;
             } else {
-                Toast.showToast("Helaas! De afstand was " + distance, "red");
+                window.Toast.showToast("Helaas! De afstand was " + distance, "red");
 
             }
         }
         this.currQuestion += 1;
         tutorialCounter.setAttribute("text", 'value: ' + this.currQuestion + '/10');
         if (this.currQuestion == this.totalQuestions) {
-            // endscreen
+            this.endTutorial();
         } else {
             this.newBox();
         }
     }
 
     newBox() {
-        const box = document.getElementById("box");
+        const box = document.getElementById("box questionPane");
         const randomSpot = this.cubeLocations[Math.floor(Math.random() * this.cubeLocations.length)];
         box.setAttribute("position", randomSpot);
     }
 }
-
-
-window.Settings = new SettingsService();
-window.Tutorial = new TutorialService(window.Settings);
-
-const cursor = document.getElementById("js--cursor");
-const box = document.getElementById("box");
-// const button = document.getElementById("button");
-const soundOn = document.getElementById("sound-on");
-const soundOff = document.getElementById("sound-off");
 
 
 window.Toast = (function () {
@@ -132,3 +159,6 @@ window.Toast = (function () {
         showToast
     }
 })();
+
+window.Settings = new SettingsService();
+window.Tutorial = new TutorialService(window.Settings);
