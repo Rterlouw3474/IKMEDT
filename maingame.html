@@ -18,8 +18,10 @@
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
       <img id="ground" src="assets/ground.png" alt="">
       <img id="wall" src="assets/wall.png" alt="">
-      <a-asset-item id="zombie-obj" src="assets/zombie-still.obj"></a-asset-item>
-      <a-asset-item id="zombie-mtl" src="assets/zombie-still.mtl"></a-asset-item>
+      <a-asset-item id="zombie-obj" src="assets/zombie/zombie-still.obj"></a-asset-item>
+      <a-asset-item id="zombie-mtl" src="assets/zombie/zombie-still.mtl"></a-asset-item>
+      <audio id="success-sound" src="assets/success.mp3"></audio>
+      <audio id="failure-sound" src="assets/failure.mp3"></audio>
     </a-assets>
 
     <!-- Camera -->
@@ -65,7 +67,7 @@
     </a-box>
 
     <a-entity class="zombie" obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="0 1 -20" scale="0.5 0.5 0.5"
-      sound="src: url(assets/zombie.mp3); autoplay: false;"></a-entity>
+      sound="src: url(assets/zombie/zombie.mp3); autoplay: false;"></a-entity>
 
     <a-sphere class="js--restart sun" color="yellow" radius="10" position="0 100 0"></a-sphere>
 
