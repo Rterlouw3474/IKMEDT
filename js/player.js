@@ -1,3 +1,5 @@
+delete AFRAME.components['syn-player'];
+
 AFRAME.registerComponent('syn-player', {
   tick: function () {
     const camera = document.getElementById("js--camera");

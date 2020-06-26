@@ -20,8 +20,8 @@
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
       <img id="ground" src="assets/ground.png" alt="">
       <img id="wall" src="assets/wall.png" alt="">
-      <a-asset-item id="zombie-obj" src="assets/zombie/zombie-still.obj"></a-asset-item>
-      <a-asset-item id="zombie-mtl" src="assets/zombie/zombie-still.mtl"></a-asset-item>
+      <a-asset-item id="zombie-obj" src="assets/zombie/zombie.obj"></a-asset-item>
+      <a-asset-item id="zombie-mtl" src="assets/zombie/zombie.mtl"></a-asset-item>
       <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
       <audio id="success-sound" src="assets/success.mp3"></audio>
@@ -40,7 +40,7 @@
     </a-camera>
 
     <!-- Information -->
-    <a-entity id="informationPopup" visible="false" position="0 1 0">
+    <a-entity id="informationPopup" visible="true" position="0 1 0">
       <a-plane id="title-plane" position="0 2.1 -2" width="1.5" height="2" color="blue">
         <a-text id="menu-title" align="center" value="Keep Your Distance!" width="3.5" color="white" position="0 0.8 0">
         </a-text>
@@ -64,20 +64,12 @@
     <a-sky src="assets\sky\sky2-panorama.jpg"></a-sky>
 
     <a-box class="direction" color="red" width="10" height="10" position="0 5 -45" visible="false">
-      <a-sound class="sound-success" src="#success"></a-sound>
-      <a-sound class="sound-failure" src="#failure"></a-sound>
     </a-box>
     <a-box class="direction" color="green" width="10" height="10" position="45 5 0" rotation="0 90 0" visible="false">
-      <a-sound class="sound-success" src="#success"></a-sound>
-      <a-sound class="sound-failure" src="#failure"></a-sound>
     </a-box>
     <a-box class="direction" color="blue" width="10" height="10" position="0 5 45" visible="false">
-      <a-sound class="sound-success" src="#success"></a-sound>
-      <a-sound class="sound-failure" src="#failure"></a-sound>
     </a-box>
     <a-box class="direction" color="yellow" width="10" height="10" position="-45 5 0" rotation="0 90 0" visible="false">
-      <a-sound class="sound-success" src="#success"></a-sound>
-      <a-sound class="sound-failure" src="#failure"></a-sound>
     </a-box>
 
     <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22"
