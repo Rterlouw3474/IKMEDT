@@ -13,4 +13,3 @@ navigateToGame = () => {
 navigateToTutorial = () => {
   window.location.href = "tutorial.html";
 }
-

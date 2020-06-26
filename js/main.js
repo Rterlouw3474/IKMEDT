@@ -12,7 +12,6 @@ class SettingsService {
     }
     toggleSound(val) {
         this.soundIsOn = val;
-        console.log("sound ", val)
     }
 
     setDistance(dist) {

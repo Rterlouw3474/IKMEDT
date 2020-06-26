@@ -5,6 +5,7 @@
   <title>VR-KeepYourDistance!</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="./js/nav.js"></script>
+  <script type="text/javascript" src="./js/player.js"></script>
   <script type="text/javascript" src="./js/maingame.js"></script>
   <script></script>
 </head>
@@ -13,6 +14,8 @@
   <a-scene>
 
     <a-assets>
+      <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
+      <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
       <img id="ground" src="assets/ground.png" alt="">
       <img id="wall" src="assets/wall.png" alt="">
       <a-asset-item id="zombie-obj" src="assets/zombie-still.obj"></a-asset-item>
@@ -65,6 +68,11 @@
       sound="src: url(assets/zombie.mp3); autoplay: false;"></a-entity>
 
     <a-sphere class="js--restart sun" color="yellow" radius="10" position="0 100 0"></a-sphere>
+
+    <!-- Player model -->
+    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.3 0.4 0.4"
+      rotation="0 90 0" position="0 0 0"></a-obj-model>
+      <a-entity syn-player></a-entity>
 
   </a-scene>
 </body>
