@@ -5,6 +5,8 @@
   <title>VR-KeepYourDistance!</title>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="./js/nav.js"></script>
+
+  <script type="text/javascript" src="./js/aframe.js"></script>
   <script type="text/javascript" src="./js/player.js"></script>
   <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
 </head>
@@ -16,14 +18,130 @@
     <a-assets>
       <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
+
+      <a-assets-item id="user-obj" src="./Models/User/BasicBanditBlend.obj"></a-assets-item>
+      <a-assets-item id="user-mtl" src="./Models/User/BasicBanditBlend.mtl"></a-assets-item>
     </a-assets>
 
-    <a-camera id="js--camera" wasd-controls="acceleration: 300">
+    <a-camera id="js--camera myCamera" wasd-controls="acceleration: 300">
       <a-cursor id="js--cursor" color="black"></a-cursor>
+      <a-entity id="tutorial-counter" text="value: 1/10; color: black; width: 1;" position="-0.9 0.5 -1"></a-entity>
+      <a-plane id="toast" position="1 0.5 -1" width="1" height="0.1" color="#4CAF50" visible="false">
+        <a-text width="1" position="0 0 0" align="center"></a-text>
+      </a-plane>
     </a-camera>
 
+    <!-- Sky -->
+    <a-sky src="assets\sky\sky2-panorama.jpg"></a-sky>
+
+    <!-- MENU GENERIC-->
+    <a-entity id="generic-menu" visible="false" position="1000 1000 1000">
+      <a-plane id="title-plane" position="0 2.1 -2" width="1" height="0.2">
+        <a-text id="menu-title" align="center" value="Settings Menu" width="2" color="black"></a-text>
+      </a-plane>
+      <a-plane onClick="Settings.closeSettings()" interactive-feedback position="0 0.8 -2" color="blue" material=""
+        geometry="height: 0.25" scale="">
+        <a-text value="Back" interactive-feedback text="align: center" width="2.5"></a-text>
+      </a-plane>
+    </a-entity>
+    <a-plane onClick="Settings.openSettings()" look-at="#myCamera" interactive-feedback position="2.5 0.8 -2"
+      color="blue" material="" geometry="height: 0.25" scale="">
+      <a-text value="Settings" interactive-feedback text="align: center" width="2.5"></a-text>
+    </a-plane>
+
+    <!-- SETTINGS MENU SPECIFIC -->
+    <a-entity id="settings-menu-scene" visible="false" position="1000 1000 1000">
+      <a-plane id="sound-plane" position="-1 1.5 -1.75" rotation="0 30 0" color="blue" width="1" height="1">
+        <a-text value="Geluid aan of uit?" width="1.5" position="-0.29 0.2 0"></a-text>
+        <a-plane onClick="Settings.toggleSound(true)" toast="message:Het geluid staat aan!" interactive-feedback
+          id="sound-on" position="-0.2 -0.05 0.01" width="0.3" height="0.2" color="blue">
+          <a-text align="center" value="Aan" width="1.5" position="0 0 0"></a-text>
+        </a-plane>
+        <a-plane onClick="Settings.toggleSound(false)" toast="message:Het geluid staat uit!" interactive-feedback
+          id="sound-off" position="0.1 -0.05 0.01" width="0.3" height="0.2" color="blue">
+          <a-text align="center" value="Uit" width="1.5" position="0 0 0"></a-text>
+        </a-plane>
+      </a-plane>
+
+      <a-plane id="distance-plane" position="0 1.5 -2" color="blue" width="1" height="1">
+        <a-text value="Afstand" width="1.5" position="-0.15 0.2 0"></a-text>
+        <a-plane onClick="Settings.setDistance(1.5)" toast="message:De afstand is aangepast naar 1.5 M"
+          interactive-feedback id="afstand-150" position="-0.2 -0.05 0.01" width="0.3" height="0.2" color="blue">
+          <a-text toast="message:De afstand is aangepast naar 2 M" value=" 1,5 M" width="1.5" position="0 0 0"
+            align="center"></a-text>
+        </a-plane>
+        <a-plane onClick="Settings.setDistance(2.0)" toast="message:De afstand is aangepast naar 2.0 M"
+          interactive-feedback id="afstand-200" position="0.1 -0.05 0.01" width="0.3" height="0.2" color="blue">
+          <a-text align="center" value="2 M" width="1.5" position="0 0 0"></a-text>
+        </a-plane>
+      </a-plane>
+
+      <a-plane id="units-plane" position="1 1.5 -1.75" rotation="0 -30 0" color="blue" width="1" height="1">
+        <a-text value="Eenheid" width="1.5" position="-0.1 0.2 0"></a-text>
+        <a-plane onClick="Settings.setUnit('metric')" toast="message:De eenheid is aangepast naar Metric"
+          interactive-feedback id="metric" position="-0.2141 -0.05 0.00107" width="0.35" height="0.3" color="blue"
+          material="" geometry="">
+          <a-text align="center" value="Rolmaat" width="1.5"></a-text>
+          <a-text align="center" value="(Metric)" width="1" position="0 -0.1 0" text=""></a-text>
+        </a-plane>
+        <a-plane onClick="Settings.setUnit('imperial')" toast="message:De eenheid is aangepast naar Imperial"
+          interactive-feedback id="imperial" position="0.22098 -0.05 0.01256" width="0.5" height="0.3" color="blue"
+          material="" geometry="">
+          <a-text align="center" value="Lichaamsdelen" width="1.5"></a-text>
+          <a-text align="center" value="(Imperial)" width="1" position="0 -0.1 0" text=""></a-text>
+        </a-plane>
+      </a-plane>
+    </a-entity>
+
+    <!-- TUTORIAL GAME RESULT -->
+    <!-- <a-entity id="tutorial-result">
+      <a-plane id="result-plane" position="0 1.5 -2" color="blue" width="1" height="1">
+        <a-text id="achieved" value="Gehaald" width="1.5" position="0 0.2 0" align="center"></a-text>
+        <a-text id="" value="Gefeliciteerd!" width="1.5" position="0 0.08 0" align="center"></a-text>
+        <a-plane onClick="Tutorial.startTutorial()" interactive-feedback id="afstand-150" position="-0.2 -0.05 0.01"
+          width="0.3" height="0.2" color="blue">
+          <a-text value="Opnieuw!" width="1.5" position="0 0 0" align="center"></a-text>
+        </a-plane>
+        <a-plane onClick="Settings.setDistance(2.0)" interactive-feedback id="afstand-200" position="0.1 -0.05 0.01"
+          width="0.3" height="0.2" color="blue">
+          <a-text align="center" value="Kom maar door met het spel!" width="1.5" position="0 0 0"></a-text>
+        </a-plane>
+      </a-plane>
+    </a-entity> -->
+
+    <!-- TUTORIAL GAME -->
+    <a-entity id="tutorial-game-scene">
+
+      <!-- Bron: https://www.turbosquid.com/FullPreview/Index.cfm/ID/1250561 -->
+      <a-obj-model id="user" src="#user-obj" mtl="#user-mtl" position="0 0 0.2" rotation="0 180"></a-obj-model>
+
+      <a-box id="box" position="-0.6 0.5 -1.5" color="red" height="0.5" width="0.5" material="" geometry="depth: 0.5">
+        <a-plane look-at="#myCamera" id="question" position="0 1 0" width="0.5" height="0.3" material="opacity: 0"
+          geometry="">
+
+          <a-plane material="opacity: 0.3; color: #000" position="0 0.5 0" geometry="height: 0.3">
+            <a-text align="center" value="Meer dan 1.5 M?" width="2" color="#000" text=""></a-text>
+          </a-plane>
+
+          <a-plane onclick="Tutorial.setAnswer('yes')" interactive-feedback="" material="opacity: 0.3; color: #00ff2a"
+            geometry="height: 0.3; width: 0.5" position="0.3 0 0">
+            <a-text id="answer-yes" align="center" value="Ja" width="1.8" position="" color="#000" text=""></a-text>
+          </a-plane>
+          <a-plane onclick="Tutorial.setAnswer('no')" id="answer-no" interactive-feedback=""
+            material="opacity: 0.3; color: #ff0000" geometry="height: 0.3; width: 0.5" position="-0.3 0 0">
+            <a-text align="center" value="Nee" width="1.8" position="" color="#000" text=""></a-text>
+          </a-plane>
+
+        </a-plane>
+      </a-box>
+
+    </a-entity>
+
+
+
     <!-- Player model -->
-    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22" rotation="0 90 0" position="0 0 0"></a-obj-model>
+    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22"
+      rotation="0 90 0" position="0 0 0"></a-obj-model>
 
     <!-- positioning: x y z -->
 
@@ -36,15 +154,24 @@
     -->
 
     <!-- Ground -->
-    <a-plane static-body id="ground_tile_1" src="assets\ground_tiles\basic_ground_tile.jpg" position="-25 0 -25" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_2" src="assets\ground_tiles\basic_ground_tile.jpg" position="0 0 -25" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_3" src="assets\ground_tiles\basic_ground_tile.jpg" position="25 0 -25" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_4" src="assets\ground_tiles\basic_ground_tile.jpg" position="-25 0 0" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_5" src="assets\ground_tiles\basic_ground_tile.jpg" position="0 0 0" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_6" src="assets\ground_tiles\basic_ground_tile.jpg" position="25 0 0" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_7" src="assets\ground_tiles\basic_ground_tile.jpg" position="-25 0 25" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_8" src="assets\ground_tiles\basic_ground_tile.jpg" position="0 0 25" width="25" height="25" rotation="-90 0 0"></a-plane>
-    <a-plane static-body id="ground_tile_9" src="assets\ground_tiles\basic_ground_tile.jpg" position="25 0 25" width="25" height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_1" src="assets\ground_tiles\basic_ground_tile.jpg" position="-25 0 -25"
+      width="25" height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_2" src="assets\ground_tiles\basic_ground_tile.jpg" position="0 0 -25"
+      width="25" height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_3" src="assets\ground_tiles\basic_ground_tile.jpg" position="25 0 -25"
+      width="25" height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_4" src="assets\ground_tiles\basic_ground_tile.jpg" position="-25 0 0"
+      width="25" height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_5" src="assets\ground_tiles\basic_ground_tile.jpg" position="0 0 0" width="25"
+      height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_6" src="assets\ground_tiles\basic_ground_tile.jpg" position="25 0 0" width="25"
+      height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_7" src="assets\ground_tiles\basic_ground_tile.jpg" position="-25 0 25"
+      width="25" height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_8" src="assets\ground_tiles\basic_ground_tile.jpg" position="0 0 25" width="25"
+      height="25" rotation="-90 0 0"></a-plane>
+    <a-plane static-body id="ground_tile_9" src="assets\ground_tiles\basic_ground_tile.jpg" position="25 0 25"
+      width="25" height="25" rotation="-90 0 0"></a-plane>
 
 
     <!-- wall tiles
@@ -57,25 +184,31 @@
     -->
 
     <!-- Walls -->
-    <a-plane static-body id="wall_tile_1" src="assets\wall_tiles\basic_ground_wall.jpg" position="-25 5 -37.5" width="25" height="10" rotation="0 0 0"></a-plane>
-    <a-plane static-body id="wall_tile_2" src="assets\wall_tiles\basic_ground_wall.jpg" position="0 5 -37.5" width="25" height="10" rotation="0 0 0"></a-plane>
-    <a-plane static-body id="wall_tile_3" src="assets\wall_tiles\basic_ground_wall.jpg" position="25 5 -37.5" width="25" height="10" rotation="0 0 0"></a-plane>
-    <a-plane static-body id="wall_tile_4" src="assets\wall_tiles\basic_ground_wall.jpg" position="-37.5 5 -25" width="25" height="10" rotation="0 90 0"></a-plane>
-    <a-plane static-body id="wall_tile_5" src="assets\wall_tiles\basic_ground_wall.jpg" position="-37.5 5 0" width="25" height="10" rotation="0 90 0"></a-plane>
-    <a-plane static-body id="wall_tile_6" src="assets\wall_tiles\basic_ground_wall.jpg" position="-37.5 5 25" width="25" height="10" rotation="0 90 0"></a-plane>
-    <a-plane static-body id="wall_tile_7" src="assets\wall_tiles\basic_ground_wall.jpg" position="37.5 5 -25" width="25" height="10" rotation="0 -90 0"></a-plane>
-    <a-plane static-body id="wall_tile_7" src="assets\wall_tiles\basic_ground_wall.jpg" position="37.5 5 0" width="25" height="10" rotation="0 -90 0"></a-plane>
-    <a-plane static-body id="wall_tile_7" src="assets\wall_tiles\basic_ground_wall.jpg" position="37.5 5 25" width="25" height="10" rotation="0 -90 0"></a-plane>
-    <a-plane static-body id="wall_tile_10" src="assets\wall_tiles\basic_ground_wall.jpg" position="-25 5 37.5" width="25" height="10" rotation="0 -180 0"></a-plane>
-    <a-plane static-body id="wall_tile_11" src="assets\wall_tiles\basic_ground_wall.jpg" position="0 5 37.5" width="25" height="10" rotation="0 -180 0"></a-plane>
-    <a-plane static-body id="wall_tile_12" src="assets\wall_tiles\basic_ground_wall.jpg" position="25 5 37.5" width="25" height="10" rotation="0 -180 0"></a-plane>
+    <a-plane static-body id="wall_tile_1" src="assets\wall_tiles\basic_ground_wall.jpg" position="-25 5 -37.5"
+      width="25" height="10" rotation="0 0 0"></a-plane>
+    <a-plane static-body id="wall_tile_2" src="assets\wall_tiles\basic_ground_wall.jpg" position="0 5 -37.5" width="25"
+      height="10" rotation="0 0 0"></a-plane>
+    <a-plane static-body id="wall_tile_3" src="assets\wall_tiles\basic_ground_wall.jpg" position="25 5 -37.5" width="25"
+      height="10" rotation="0 0 0"></a-plane>
+    <a-plane static-body id="wall_tile_4" src="assets\wall_tiles\basic_ground_wall.jpg" position="-37.5 5 -25"
+      width="25" height="10" rotation="0 90 0"></a-plane>
+    <a-plane static-body id="wall_tile_5" src="assets\wall_tiles\basic_ground_wall.jpg" position="-37.5 5 0" width="25"
+      height="10" rotation="0 90 0"></a-plane>
+    <a-plane static-body id="wall_tile_6" src="assets\wall_tiles\basic_ground_wall.jpg" position="-37.5 5 25" width="25"
+      height="10" rotation="0 90 0"></a-plane>
+    <a-plane static-body id="wall_tile_7" src="assets\wall_tiles\basic_ground_wall.jpg" position="37.5 5 -25" width="25"
+      height="10" rotation="0 -90 0"></a-plane>
+    <a-plane static-body id="wall_tile_7" src="assets\wall_tiles\basic_ground_wall.jpg" position="37.5 5 0" width="25"
+      height="10" rotation="0 -90 0"></a-plane>
+    <a-plane static-body id="wall_tile_7" src="assets\wall_tiles\basic_ground_wall.jpg" position="37.5 5 25" width="25"
+      height="10" rotation="0 -90 0"></a-plane>
+    <a-plane static-body id="wall_tile_10" src="assets\wall_tiles\basic_ground_wall.jpg" position="-25 5 37.5"
+      width="25" height="10" rotation="0 -180 0"></a-plane>
+    <a-plane static-body id="wall_tile_11" src="assets\wall_tiles\basic_ground_wall.jpg" position="0 5 37.5" width="25"
+      height="10" rotation="0 -180 0"></a-plane>
+    <a-plane static-body id="wall_tile_12" src="assets\wall_tiles\basic_ground_wall.jpg" position="25 5 37.5" width="25"
+      height="10" rotation="0 -180 0"></a-plane>
 
-    <!-- Sky -->
-    <a-sky src="assets\sky\sky2-panorama.jpg"></a-sky>
-
-    <!-- Test for objects -->
-    <a-box dynamic-body color="red"  position="-0.5 0.5 -3" rotation="0 0 0" ></a-box>
-    <a-box dynamic-body color="green"  position="-1 5 -3" rotation="0 0 0" ></a-box>
 
 
   </a-scene>
