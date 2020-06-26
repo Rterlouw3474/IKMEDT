@@ -7,9 +7,10 @@ navigateToEndscreen = () => {
 }
 
 navigateToGame = () => {
-  window.location.href = "game.html";
+  window.location.href = "maingame.html";
 }
 
 navigateToTutorial = () => {
   window.location.href = "tutorial.html";
 }
+
