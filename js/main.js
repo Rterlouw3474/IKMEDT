@@ -59,8 +59,15 @@ class TutorialService {
     }
 
     endTutorial() {
-        const tutorialScene = document.getElementById("tutorial-game-scene");
+        const tutorialResult = document.getElementById("tutorial-result");
+        tutorialResult.setAttribute("visible", "true");
+        tutorialResult.setAttribute("position", "0 0 0");
+        
+        tutorialResult.setAttribute("", "")
 
+        const tutorialScene = document.getElementById("tutorial-game-scene");
+        tutorialScene.setAttribute("visible", "false");
+        tutorialScene.setAttribute("position", "1000 1000 1000");
     }
 
     setAnswer(yesOrNo) {
@@ -70,17 +77,17 @@ class TutorialService {
         const distance = calc_distance(user, currBox);
         if (distance >= this.settings.distance) {
             if (yesOrNo == "yes") {
-                Toast.showToast("Goedzo! De afstand was " + distance);
+                Toast.showToast("Goedzo! De afstand was " + distance, "green");
                 this.rightAnswers += 1;
             } else {
-                Toast.showToast("Helaas! De afstand was " + distance);
+                Toast.showToast("Helaas! De afstand was " + distance, "red");
             }
         } else {
             if (yesOrNo == "no") {
-                Toast.showToast("Goedzo! De afstand was " + distance);
+                Toast.showToast("Goedzo! De afstand was " + distance, "green");
                 this.rightAnswers += 1;
             } else {
-                Toast.showToast("Helaas! De afstand was " + distance);
+                Toast.showToast("Helaas! De afstand was " + distance, "red");
 
             }
         }
@@ -114,9 +121,10 @@ const soundOff = document.getElementById("sound-off");
 window.Toast = (function () {
     const toast = document.getElementById("toast");
 
-    function showToast(message) {
+    function showToast(message, color) {
         const text = toast.firstElementChild;
         text.setAttribute('value', message);
+        toast.setAttribute("color", color);
         toast.setAttribute("visible", true);
         setTimeout(() => { toast.setAttribute("visible", false) }, 3000);
     }

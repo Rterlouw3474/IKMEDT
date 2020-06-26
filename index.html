@@ -39,8 +39,8 @@
         <a-text value="Back" interactive-feedback text="align: center" width="2.5"></a-text>
       </a-plane>
     </a-entity>
-    <a-plane onClick="Settings.openSettings()" interactive-feedback position="2.5 0.8 -2" color="blue" material=""
-      geometry="height: 0.25" scale="">
+    <a-plane onClick="Settings.openSettings()" look-at="#myCamera" interactive-feedback position="2.5 0.8 -2"
+      color="blue" material="" geometry="height: 0.25" scale="">
       <a-text value="Settings" interactive-feedback text="align: center" width="2.5"></a-text>
     </a-plane>
 
@@ -88,8 +88,23 @@
       </a-plane>
     </a-entity>
 
-    <!-- Tutorial game -->
-    <!-- look-at="#myCamera" -->
+    <!-- TUTORIAL GAME RESULT -->
+    <a-entity id="tutorial-result">
+      <a-plane id="result-plane" position="0 1.5 -2" color="blue" width="1" height="1">
+        <a-text id="achieved" value="Gehaald" width="1.5" position="0 0.2 0" align="center"></a-text>
+        <a-text id="" value="Gefeliciteerd!" width="1.5" position="0 0.08 0" align="center"></a-text>
+        <a-plane onClick="Tutorial.startTutorial()" interactive-feedback id="afstand-150" position="-0.2 -0.05 0.01"
+          width="0.3" height="0.2" color="blue">
+          <a-text value="Opnieuw!" width="1.5" position="0 0 0" align="center"></a-text>
+        </a-plane>
+        <a-plane onClick="Settings.setDistance(2.0)" interactive-feedback id="afstand-200" position="0.1 -0.05 0.01"
+          width="0.3" height="0.2" color="blue">
+          <a-text align="center" value="Kom maar door met het spel!" width="1.5" position="0 0 0"></a-text>
+        </a-plane>
+      </a-plane>
+    </a-entity>
+
+    <!-- TUTORIAL GAME -->
     <a-entity id="tutorial-game-scene">
 
       <!-- Bron: https://www.turbosquid.com/FullPreview/Index.cfm/ID/1250561 -->
