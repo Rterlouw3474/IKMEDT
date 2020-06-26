@@ -1,7 +1,8 @@
 window.onload = function() {
-  const places = document.getElementsByClassName("js--place");
+  const places = document.getElementsByClassName("direction");
   const camera = document.getElementById("js--camera");
   const restart = document.getElementsByClassName("js--restart");
+  const start = document.getElementsByClassName("js--start");
 
   let victory = true;
 
@@ -11,17 +12,26 @@ window.onload = function() {
     });
   }
 
+  for (let i = 0; i < start.length; i++) {
+    start[i].addEventListener("click", function(evt) {
+      informationPopup.setAttribute("visible",false);
+      for (let i = 0; i < places.length; i++) {
+        places[i].classList.add('js--place')
+      }
+    });
+  }
+
   function gameEnd() {
     console.log("oi");
 
     setTimeout(function() {
       if (victory) {
         camera.innerHTML +=
-        '<a-entity><a-plane id="js--hold" class="js--pickup" color="green" position="-2 1 -3" width="1.5" height="1.5"><a-text position="0 0.3 0"><a-text id="menu-title" align="center" value="Congratulations!" width="4" color="black"></a-text></a-plane><a-plane position="-2 0.7 -3" color="green" geometry="height: 0.25" ><a-text value="Look at the sun to play again!" interactive-feedback color="black" text="align: center" width="2.5"></a-text></a-plane></a-entity>'
+        '<a-entity><a-plane id="js--hold" class="js--pickup" color="green" position="-2 1 -3" width="1.5" height="1.5"><a-text position="0 0.3 0"><a-text id="menu-title" align="center" value="Gefeliciteerd!" width="4" color="black"></a-text></a-plane><a-plane position="-2 0.7 -3" color="green" geometry="height: 0.25" ><a-text value="Kijk naar de zon om nog een keer te spelen!" interactive-feedback color="black" text="align: center" width="2.5"></a-text></a-plane></a-entity>'
       }
       if (!victory){
         camera.innerHTML +=
-        '<a-plane id="js--hold" class="js--pickup" color="red" position="-2 1 -3" width="1.5" height="2"><a-text><a-text id="menu-title" align="center" value="You lost!" width="2" color="black"></a-text></a-plane>'
+        '<a-entity><a-plane id="js--hold" class="js--pickup" color="red" position="-2 1 -3" width="1.5" height="1.5"><a-text position="0 0.3 0"><a-text id="menu-title" align="center" value="Helaas!" width="4" color="black"></a-text></a-plane><a-plane position="-2 0.7 -3" color="green" geometry="height: 0.25" ><a-text value="Kijk naar de zon om nog een keer te spelen!" interactive-feedback color="black" text="align: center" width="2.5"></a-text></a-plane></a-entity>'
       }
     }, 2000);
   }

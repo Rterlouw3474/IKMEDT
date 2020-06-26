@@ -29,14 +29,22 @@
           material="color: black; shader:flat"
           geometry="primitive: ring; radiusInner: 0.005; radiusOuter: 0.01"
           position="0 0 -0.5"
-          raycaster="objects: .js--place, .js--restart"
+          raycaster="objects: .js--place, .js--restart, .js--start"
         ></a-entity>
       </a-camera>
 
-      <!-- MENU GENERIC -->
-      <a-plane id="title-plane" position="0 2.1 -2" width="1" height="0.2" class="js--place" visible="false">
-        <a-text id="menu-title" align="center" value="Settings Menu" width="2" color="black"></a-text>
-      </a-plane>
+      <!-- Information -->
+      <a-entity id="informationPopup" visible="true" position="0 1 0">
+        <a-plane id="title-plane" position="0 2.1 -2" width="1.5" height="2" color="blue">
+          <a-text id="menu-title" align="center" value="Keep Your Distance!" width="3.5" color="white" position="0 0.8 0"></a-text>
+          <a-text id="menu-content" align="center" value="Kies het juiste pad, maar blijf 1.5 meter van de zombies vandaan!" width="1.5" color="white" wrap-count="20"></a-text>
+          <a-text id="menu-content" align="center" value="Kijk naar een deur om het pad te kiezen." width="1.5" color="white" wrap-count="20" position="0 -0.7 0"></a-text>
+        </a-plane>
+        <a-plane class="js--start" position="0 0.8 -2" color="blue" material="" geometry="height: 0.25"
+          scale="">
+          <a-text value="Start" interactive-feedback text="align: center" width="2.5"></a-text>
+        </a-plane>
+      </a-entity>
 
       <!-- Environment -->
       <a-plane src="#ground" position="0 0 0" width="100" height="100" rotation="-90 0 0"></a-plane>
@@ -47,12 +55,12 @@
 
       <a-sky color="#207fd1"><a-sky>
 
-      <a-box class="js--place direction-north" color="red" width="10" height="10" position="0 5 -45" visible="false"></a-box>
-      <a-box class="js--place direction-east" color="green" width="10" height="10" position="45 5 0" rotation="0 90 0" visible="false"></a-box>
-      <a-box class="js--place direction-south" color="blue" width="10" height="10" position="0 5 45" visible="false"></a-box>
-      <a-box class="js--place direction-west" color="yellow" width="10" height="10" position="-45 5 0" rotation="0 90 0" visible="false"></a-box>
+      <a-box class="direction" color="red" width="10" height="10" position="0 5 -45" visible="false"></a-box>
+      <a-box class="direction" color="green" width="10" height="10" position="45 5 0" rotation="0 90 0" visible="false"></a-box>
+      <a-box class="direction" color="blue" width="10" height="10" position="0 5 45" visible="false"></a-box>
+      <a-box class="direction" color="yellow" width="10" height="10" position="-45 5 0" rotation="0 90 0" visible="false"></a-box>
 
-      <a-entity obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="-1 1 -3" scale="0.5 0.5 0.5"></a-entity>
+      <!-- <a-entity obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="-1 1 -3" scale="0.5 0.5 0.5" sound="src: url(assets/zombie.mp3); autoplay: true;"></a-entity> -->
 
       <a-sphere class="js--restart sun" color="yellow" radius="10" position="0 100 0"></a-sphere>
 
