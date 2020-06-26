@@ -112,6 +112,7 @@ class TutorialService {
         const user = document.getElementById("user")
         const currBox = document.getElementById("box questionPane");
         const distance = calc_distance(user, currBox);
+        let currElement = currBox;
         if (distance >= this.settings.distance) {
             if (yesOrNo == "yes") {
                 window.Toast.showToast("Goedzo! De afstand was " + distance, "green");
@@ -130,14 +131,20 @@ class TutorialService {
         }
         this.currQuestion += 1;
         tutorialCounter.setAttribute("text", 'value: ' + this.currQuestion + '/10');
+        if (this.currQuestion == this.totalQuestions - 1) {
+            currBox.setAttribute("visible", "false");
+            const toilet = document.getElementById("toilet");
+            toilet.setAttribute("visible", "true");
+            currElement = toilet;
+        }
         if (this.currQuestion == this.totalQuestions) {
             this.endTutorial();
         } else {
-            this.newBox();
+            this.newBox(currElement);
         }
     }
 
-    newBox() {
+    newBox(element) {
         const box = document.getElementById("box questionPane");
         const randomSpot = this.cubeLocations[Math.floor(Math.random() * this.cubeLocations.length)];
         box.setAttribute("position", randomSpot);

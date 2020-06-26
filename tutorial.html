@@ -20,6 +20,9 @@
 
       <a-assets-item id="user-obj" src="./Models/User/BasicBanditBlend.obj"></a-assets-item>
       <a-assets-item id="user-mtl" src="./Models/User/BasicBanditBlend.mtl"></a-assets-item>
+
+      <a-assets-item id="toilet-obj" src="./assets/toilet/toilet.obj"></a-assets-item>
+      <a-assets-item id="toilet-mtl" src="./assets/toilet/toilet.mtl"></a-assets-item>
     </a-assets>
 
     <a-camera id="js--camera">
@@ -140,7 +143,28 @@
           </a-plane>
 
         </a-plane>
+
       </a-box>
+
+      <a-obj-model id="toilet" src="#toilet-obj" mtl="#toilet-mtl" position="-0.6 0.5 -1.5" visible="false"
+        scale="0.3 0.3 0.3">
+        <a-plane look-at="#js--camera" position="0 4.5 0" width="0.5" height="0.3" material="opacity: 0" scale="2 2 2">
+
+          <a-plane material="opacity: 0.3; color: #000" position="0 0.5 0" geometry="height: 0.3">
+            <a-text id="question" align="center" value="Meer dan 1.5 M?" width="2" color="#000" text=""></a-text>
+          </a-plane>
+
+          <a-plane class="js--Button" onclick="Tutorial.setAnswer('yes')" interactive-feedback=""
+            material="opacity: 0.3; color: #00ff2a" geometry="height: 0.3; width: 0.5" position="0.3 0 0">
+            <a-text id="answer-yes" align="center" value="Ja" width="1.8" position="" color="#000" text=""></a-text>
+          </a-plane>
+          <a-plane class="js--Button" onclick="Tutorial.setAnswer('no')" id="answer-no" interactive-feedback=""
+            material="opacity: 0.3; color: #ff0000" geometry="height: 0.3; width: 0.5" position="-0.3 0 0">
+            <a-text align="center" value="Nee" width="1.8" position="" color="#000" text=""></a-text>
+          </a-plane>
+
+        </a-plane>
+      </a-obj-model>
 
     </a-entity>
 
