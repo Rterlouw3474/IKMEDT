@@ -17,11 +17,16 @@
     <a-assets>
       <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
-      <a-assets-item id="user-obj" src="./Models/User/BasicBanditBlend.obj"></a-assets-item>
-      <a-assets-item id="user-mtl" src="./Models/User/BasicBanditBlend.mtl"></a-assets-item>
+
+      <a-assets-item id="user-obj" src="./assets/User/BasicBanditBlend.obj"></a-assets-item>
+      <a-assets-item id="user-mtl" src="./assets/User/BasicBanditBlend.mtl"></a-assets-item>
+
+      <a-assets-item id="radius-obj" src="./assets/Radius/Radius.obj"></a-assets-item>
+      <a-assets-item id="radius-mtl" src="./assets/Radius/Radius.mtl"></a-assets-item>
 
       <a-assets-item id="toilet-obj" src="./assets/toilet/toilet.obj"></a-assets-item>
       <a-assets-item id="toilet-mtl" src="./assets/toilet/toilet.mtl"></a-assets-item>
+
     </a-assets>
 
     <a-camera id="js--camera">
@@ -37,6 +42,11 @@
         <a-text width="1" position="0 0 0" align="center"></a-text>
       </a-plane>
     </a-camera>
+
+    <a-entity id="radius" position="0 0 0">
+      <a-obj-model id="radius-object" src="#radius-obj" mtl="#radius-mtl" color="#fff"></a-obj-model>
+
+    </a-entity>
 
     <!-- Sky -->
     <a-sky src="assets\sky\sky2-panorama.jpg"></a-sky>
