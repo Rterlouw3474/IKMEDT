@@ -6,6 +6,7 @@
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script type="text/javascript" src="./js/nav.js"></script>
   <script type="text/javascript" src="./js/maingame.js"></script>
+  <script type="text/javascript" src="./js/player.js"></script>
   <script></script>
 </head>
 
@@ -15,12 +16,16 @@
     <a-assets>
       <img id="ground" src="assets/ground.png" alt="">
       <img id="wall" src="assets/wall.png" alt="">
-      <a-asset-item id="zombie-obj" src="assets/zombie-still.obj"></a-asset-item>
-      <a-asset-item id="zombie-mtl" src="assets/zombie-still.mtl"></a-asset-item>
+      <a-asset-item id="zombie-obj" src="assets/zombie/zombie-still.obj"></a-asset-item>
+      <a-asset-item id="zombie-mtl" src="assets/zombie/zombie-still.mtl"></a-asset-item>
+      <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
+      <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
+      <audio id="success-sound" src="assets/success.mp3"></audio>
+      <audio id="failure-sound" src="assets/failure.mp3"></audio>
     </a-assets>
 
     <!-- Camera -->
-    <a-camera id="js--camera" wasd-controls="acceleration: 300" animation="" position="0 3 0">
+    <a-camera id="js--camera" class="myCamera" wasd-controls="acceleration: 300" animation="" position="0 3 0">
       <a-entity id="cursor"
         animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 2000; from: 1 1 1; to: 0.1 0.1 0.1"
         animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
@@ -54,15 +59,28 @@
 
     <a-sky src="assets\sky\sky2-panorama.jpg"></a-sky>
 
-    <a-box class="direction" color="red" width="10" height="10" position="0 5 -45" visible="false"></a-box>
-    <a-box class="direction" color="green" width="10" height="10" position="45 5 0" rotation="0 90 0" visible="false">
+    <a-box class="direction" color="red" width="10" height="10" position="0 5 -45" visible="false">
+      <a-sound class="sound-success" src="#success"></a-sound>
+      <a-sound class="sound-failure" src="#failure"></a-sound>
     </a-box>
-    <a-box class="direction" color="blue" width="10" height="10" position="0 5 45" visible="false"></a-box>
+    <a-box class="direction" color="green" width="10" height="10" position="45 5 0" rotation="0 90 0" visible="false">
+      <a-sound class="sound-success" src="#success"></a-sound>
+      <a-sound class="sound-failure" src="#failure"></a-sound>
+    </a-box>
+    <a-box class="direction" color="blue" width="10" height="10" position="0 5 45" visible="false">
+      <a-sound class="sound-success" src="#success"></a-sound>
+      <a-sound class="sound-failure" src="#failure"></a-sound>
+    </a-box>
     <a-box class="direction" color="yellow" width="10" height="10" position="-45 5 0" rotation="0 90 0" visible="false">
+      <a-sound class="sound-success" src="#success"></a-sound>
+      <a-sound class="sound-failure" src="#failure"></a-sound>
     </a-box>
 
-    <a-entity class="zombie" obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="0 1 -20" scale="0.5 0.5 0.5"
-      sound="src: url(assets/zombie.mp3); autoplay: false;"></a-entity>
+    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22"
+      rotation="0 90 0" position="0 0 0"></a-obj-model>
+
+    <a-entity id="zombie" class="zombie" obj-model="obj: #zombie-obj; mtl: #zombie-mtl" position="0 1 -20" scale="0.5 0.5 0.5"
+      sound="src: url(assets/zombie/zombie.mp3); autoplay: false;"></a-entity>
 
     <a-sphere class="js--restart sun" color="yellow" radius="10" position="0 100 0"></a-sphere>
 

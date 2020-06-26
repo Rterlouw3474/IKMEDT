@@ -1,9 +1,17 @@
+const calc_distance = (el1, el2) => {
+    const pos1 = el1.object3D.position;
+    const pos2 = el2.object3D.position;
+    return pos1.distanceTo(pos2).toFixed(2);
+}
+
 window.onload = function () {
+
   const places = document.getElementsByClassName("direction");
   const camera = document.getElementById("js--camera");
   const restart = document.getElementsByClassName("js--restart");
   const start = document.getElementsByClassName("js--start");
   const zombies = document.getElementsByClassName("zombie");
+
 
   let victory = true;
 
@@ -17,9 +25,18 @@ window.onload = function () {
     start[i].addEventListener("click", function (evt) {
       informationPopup.setAttribute("visible", false);
       for (let i = 0; i < places.length; i++) {
-        places[i].classList.add('js--place')
+        places[i].classList.add('js--place');
       }
     });
+  }
+
+  setInterval(onTimerTick, 33);
+
+  function onTimerTick() {
+    const user = document.getElementById("user");
+    const zombie = document.getElementById("zombie");
+    const distance = calc_distance(user, zombie);
+    console.log(distance);
   }
 
   function gameEnd() {
@@ -29,9 +46,6 @@ window.onload = function () {
 
     for (let i = 0; i < zombies.length; i++) {
       zombies[i].classList.add('js--zombie');
-      zombies[i].addEventListener('click', evt => {
-        victory = false;
-      })
     }
 
     setTimeout(function () {
