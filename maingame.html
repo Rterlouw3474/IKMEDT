@@ -18,12 +18,13 @@
     <a-assets>
       <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
       <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
+
       <img id="ground" src="assets/ground.png" alt="">
       <img id="wall" src="assets/wall.png" alt="">
+
       <a-asset-item id="zombie-obj" src="assets/zombie/zombie.obj"></a-asset-item>
       <a-asset-item id="zombie-mtl" src="assets/zombie/zombie.mtl"></a-asset-item>
-      <a-assets-item id="player-model-obj" src="assets\player_model\usermodel.obj"></a-assets-item>
-      <a-assets-item id="player-model-mtl" src="assets\player_model\usermodel.mtl"></a-assets-item>
+
       <audio id="success-sound" src="assets/success.mp3"></audio>
       <audio id="failure-sound" src="assets/failure.mp3"></audio>
     </a-assets>
@@ -71,9 +72,6 @@
     </a-box>
     <a-box class="direction" color="yellow" width="10" height="10" position="-45 5 0" rotation="0 90 0" visible="false">
     </a-box>
-
-    <a-obj-model id="js--player-model" src="#player-model-obj" mtl="#player-model-mtl" scale="0.22 0.22 0.22"
-      rotation="0 90 0" position="0 0 0"></a-obj-model>
 
     <a-sphere class="js--restart sun" color="yellow" radius="10" position="0 100 0"></a-sphere>
 
