@@ -12,16 +12,13 @@ class SettingsService {
     }
     toggleSound(val) {
         this.soundIsOn = val;
-        console.log("sound ", val)
     }
 
     setDistance(dist) {
         this.distance = dist;
-        console.log("distance ", dist)
     }
     setUnit(unit) {
         this.unit = unit;
-        console.log("unit ", unit)
     }
     closeSettings() {
         const settings = document.getElementById("settings-menu-scene");
@@ -62,7 +59,7 @@ class TutorialService {
         const tutorialResult = document.getElementById("tutorial-result");
         tutorialResult.setAttribute("visible", "true");
         tutorialResult.setAttribute("position", "0 0 0");
-        
+
         tutorialResult.setAttribute("", "")
 
         const tutorialScene = document.getElementById("tutorial-game-scene");
